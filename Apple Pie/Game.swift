@@ -12,5 +12,30 @@ struct Game {
     var word: String //guess of word
     var incorrectMovesRemaining: Int //quntity of try
     
+    //list of pressed button
+    var guessedLetters: [Character]
     
+    //display word
+    var formattedWord: String{
+        var guessedWord = ""
+        
+        for letter in word{
+            if guessedLetters.contains(letter){
+                guessedWord += "\(letter)"
+            }else{
+                guessedWord += "_"
+            }
+        }
+        return guessedWord
+    }
+    
+    //treatmant of pressed char
+    mutating func playerGuessed(letter: Character){
+        guessedLetters.append(letter)
+        
+        //check this char in word
+        if !word.contains(letter){
+            incorrectMovesRemaining -= 1
+        }
+    }
 }
